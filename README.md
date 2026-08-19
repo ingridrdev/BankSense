@@ -1,20 +1,31 @@
 # BankSense
 
+[![Abrir aplicativo](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://banksense-ingridrdev.streamlit.app)
+
 Sistema desenvolvido em Python para simular a análise de risco de transações financeiras.
 
 O BankSense utiliza regras predefinidas para analisar características de uma transação, calcular um score de risco de 0 a 100 e classificá-la como baixo, médio ou alto risco.
 
+## Aplicação publicada
+
+Acesse o dashboard interativo:
+
+**[Abrir o BankSense](https://banksense-ingridrdev.streamlit.app)**
+
 ## Objetivo
 
-O projeto foi criado com o objetivo de praticar e demonstrar conhecimentos em:
+O projeto foi criado para praticar e demonstrar conhecimentos em:
 
 * Python;
 * análise de dados;
 * manipulação de arquivos CSV;
 * pandas;
+* visualização de dados;
+* criação de dashboards;
 * lógica de programação;
 * criação de regras de negócio;
-* Git e GitHub.
+* Git e GitHub;
+* publicação de aplicações.
 
 ## Funcionalidades
 
@@ -22,8 +33,24 @@ O projeto foi criado com o objetivo de praticar e demonstrar conhecimentos em:
 * Leitura automática de uma base de transações em CSV;
 * Cálculo individual do score de risco;
 * Classificação das transações;
+* Geração de indicadores analíticos;
 * Exibição dos resultados no terminal;
-* Exportação dos resultados para um novo arquivo CSV.
+* Exportação dos resultados para um novo CSV;
+* Gráfico com a distribuição dos níveis de risco;
+* Dashboard interativo com Streamlit;
+* Filtro por classificação de risco;
+* Download dos resultados analisados.
+
+## Indicadores do dashboard
+
+O painel apresenta:
+
+* Quantidade de transações analisadas;
+* Valor total das transações;
+* Score médio da base;
+* Quantidade e percentual de transações de alto risco;
+* Distribuição das transações por nível de risco;
+* Tabela detalhada com filtros.
 
 ## Regras utilizadas
 
@@ -50,9 +77,13 @@ BankSense/
 ├── data/
 │   ├── transacoes.csv
 │   └── transacoes_analisadas.csv
+├── reports/
+│   └── distribuicao_risco.png
 ├── src/
+│   ├── analise_csv.py
 │   ├── main.py
-│   └── analise_csv.py
+│   └── visualizacao.py
+├── app.py
 ├── .gitignore
 ├── README.md
 └── requirements.txt
@@ -62,9 +93,12 @@ BankSense/
 
 * Python 3;
 * pandas;
+* Matplotlib;
+* Streamlit;
 * Git;
 * GitHub;
-* Visual Studio Code.
+* Visual Studio Code;
+* Streamlit Community Cloud.
 
 ## Como executar
 
@@ -98,6 +132,24 @@ python src/main.py
 python src/analise_csv.py
 ```
 
+### 6. Gere o gráfico de distribuição
+
+```bash
+python src/visualizacao.py
+```
+
+### 7. Execute o dashboard localmente
+
+```bash
+python -m streamlit run app.py
+```
+
+O painel será disponibilizado localmente em:
+
+```text
+http://localhost:8501
+```
+
 ## Arquivos de dados
 
 O arquivo `data/transacoes.csv` contém as transações fictícias utilizadas como entrada.
@@ -116,13 +168,18 @@ Após a execução da análise automática, o BankSense gera o arquivo `data/tra
  650.0    15           pix           10   BAIXO RISCO
 ```
 
+## Visualização gerada
+
+![Distribuição das transações por nível de risco](reports/distribuicao_risco.png)
+
 ## Próximas melhorias
 
 * Validação e tratamento de dados inválidos;
-* Geração de indicadores e gráficos;
 * Criação de testes automatizados;
-* Desenvolvimento de uma interface interativa;
-* Evolução das regras com base em padrões históricos.
+* Upload de bases pelo dashboard;
+* Ampliação dos indicadores e filtros;
+* Evolução das regras com base em padrões históricos;
+* Experimentação com modelos de machine learning.
 
 ## Aviso
 
