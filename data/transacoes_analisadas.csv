@@ -1,0 +1,11 @@
+﻿valor,hora,tipo,novo_dispositivo,cidade_habitual,score_risco,classificacao
+120.5,14,debito,nao,sim,0,BAIXO RISCO
+3500.0,2,pix,sim,nao,100,ALTO RISCO
+850.0,10,transferencia,nao,sim,0,BAIXO RISCO
+7200.0,1,pix,sim,nao,100,ALTO RISCO
+200.0,19,debito,nao,sim,0,BAIXO RISCO
+1800.0,23,pix,sim,sim,20,BAIXO RISCO
+4500.0,11,transferencia,nao,nao,50,MÉDIO RISCO
+55.0,8,debito,nao,sim,0,BAIXO RISCO
+9800.0,3,pix,sim,nao,100,ALTO RISCO
+650.0,15,pix,nao,sim,10,BAIXO RISCO

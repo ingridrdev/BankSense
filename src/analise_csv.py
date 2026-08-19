@@ -4,7 +4,9 @@ import pandas as pd
 
 
 PASTA_PROJETO = Path(__file__).resolve().parent.parent
+
 CAMINHO_CSV = PASTA_PROJETO / "data" / "transacoes.csv"
+CAMINHO_RESULTADO = PASTA_PROJETO / "data" / "transacoes_analisadas.csv"
 
 transacoes = pd.read_csv(CAMINHO_CSV)
 
@@ -39,10 +41,22 @@ def classificar_risco(risco):
         return "BAIXO RISCO"
 
 
-transacoes["score_risco"] = transacoes.apply(calcular_risco, axis=1)
+# Calcula o score de cada transação
+transacoes["score_risco"] = transacoes.apply(
+    calcular_risco,
+    axis=1
+)
 
+# Classifica cada transação
 transacoes["classificacao"] = transacoes["score_risco"].apply(
     classificar_risco
+)
+
+# Salva o resultado em um novo arquivo CSV
+transacoes.to_csv(
+    CAMINHO_RESULTADO,
+    index=False,
+    encoding="utf-8-sig"
 )
 
 print("=== BankSense ===")
@@ -63,3 +77,4 @@ print(
 
 print("")
 print("Quantidade de transações analisadas:", len(transacoes))
+print("Resultado salvo em: data/transacoes_analisadas.csv")
