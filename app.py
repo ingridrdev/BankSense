@@ -3,11 +3,23 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
+from src.supabase_client import carregar_transacoes_supabase
+
 
 PASTA_PROJETO = Path(__file__).resolve().parent
 CAMINHO_DADOS = (
     PASTA_PROJETO / "data" / "transacoes_analisadas.csv"
 )
+
+COLUNAS_DASHBOARD = [
+    "valor",
+    "hora",
+    "tipo",
+    "novo_dispositivo",
+    "cidade_habitual",
+    "score_risco",
+    "classificacao",
+]
 
 
 st.set_page_config(
@@ -17,9 +29,19 @@ st.set_page_config(
 )
 
 
-@st.cache_data
+@st.cache_data(ttl=300)
 def carregar_dados():
-    return pd.read_csv(CAMINHO_DADOS)
+    try:
+        dados = carregar_transacoes_supabase()
+
+        if dados.empty:
+            raise ValueError("O Supabase não retornou transações.")
+
+        return dados[COLUNAS_DASHBOARD], "Supabase"
+
+    except Exception:
+        dados = pd.read_csv(CAMINHO_DADOS)
+        return dados[COLUNAS_DASHBOARD], "CSV"
 
 
 def formatar_reais(valor):
@@ -31,7 +53,7 @@ def formatar_reais(valor):
     return f"R$ {valor_formatado}"
 
 
-transacoes = carregar_dados()
+transacoes, fonte_dados = carregar_dados()
 
 st.title("BankSense")
 st.write("Painel de análise de risco de transações financeiras")
